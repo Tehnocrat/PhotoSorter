@@ -22,13 +22,17 @@ def get_data():
     data = pickle.loads(serialized_data)
     return data
 
+print("model started")
+
 dataset = tf.keras.utils.image_dataset_from_directory(
-  r"tensorflow-for-poets-2-master\tf_files",
+  r"tensorflow-for-poets-2-master/tf_files",
   validation_split=0.2,
   subset="training",
   seed=123,
   image_size=(256, 256),
   batch_size=32)
+
+print("imported dataset")
 
 class_names = dataset.class_names
 
@@ -36,6 +40,9 @@ class_names = dataset.class_names
 predictions = []
 score = []
 model = keras.models.load_model('MyModel')
+final = ""
+
+print("model loaded")
 
 for item in get_data():
     test_img = tf.keras.utils.load_img(
@@ -48,7 +55,7 @@ for item in get_data():
     for i in predictions:
         final += class_names[np.argmax(tf.nn.softmax(i))] + " "
 store_data(final)
-
+print("finished")
 
 
 

@@ -10,11 +10,9 @@ from tensorflow import keras
 from keras import layers
 from keras.models import Sequential
 
-test_img = tf.keras.utils.load_img(
-    r"C:\Users\zayts\Downloads\Telegram Desktop\photo_2022-12-02_14-17-57.jpg", target_size=(256, 256))
 
 dataset = tf.keras.utils.image_dataset_from_directory(
-  r"C:\Users\zayts\PycharmProjects\pythonProject\tensorflow-for-poets-2-master\tf_files",
+  r"tensorflow-for-poets-2-master/tf_files",
   validation_split=0.2,
   subset="training",
   seed=123,
@@ -22,7 +20,7 @@ dataset = tf.keras.utils.image_dataset_from_directory(
   batch_size=32)
 
 val_dataset = tf.keras.utils.image_dataset_from_directory(
-  r"C:\Users\zayts\PycharmProjects\pythonProject\tensorflow-for-poets-2-master\tf_files",
+  r"tensorflow-for-poets-2-master/tf_files",
   validation_split=0.2,
   subset="validation",
   seed=123,
@@ -91,17 +89,17 @@ history = model.fit(
   validation_data=val_dataset,
   epochs=epochs
 )
-
-
-img_array = tf.keras.utils.img_to_array(test_img)
-img_array = tf.expand_dims(img_array, 0) # Create a batch
-
-predictions = model.predict(img_array)
-score = tf.nn.softmax(predictions[0])
-
-print(
-    "This image most likely belongs to {} with a {:.2f} percent confidence."
-    .format(class_names[np.argmax(score)], 100 * np.max(score))
-)
-
 model.save('MyModel')
+
+
+#img_array = tf.keras.utils.img_to_array(test_img)
+#img_array = tf.expand_dims(img_array, 0) # Create a batch
+
+#predictions = model.predict(img_array)
+#score = tf.nn.softmax(predictions[0])
+
+#print(
+#    "This image most likely belongs to {} with a {:.2f} percent confidence."
+#    .format(class_names[np.argmax(score)], 100 * np.max(score))
+#)
+
