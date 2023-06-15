@@ -1,6 +1,6 @@
 import tensorflow as tf
 import sys
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 import os
 from PIL import *
@@ -35,9 +35,7 @@ normalization_layer = layers.Rescaling(1./255)
 normalized_ds = dataset.map(lambda x, y: (normalization_layer(x), y))
 image_batch, labels_batch = next(iter(normalized_ds))
 first_image = image_batch[0]
-# Notice the pixel values are now in `[0,1]`.
 print(np.min(first_image), np.max(first_image))
-
 num_classes = len(class_names)
 
 '''model = Sequential([
@@ -52,7 +50,7 @@ num_classes = len(class_names)
   layers.Dense(128, activation='relu'),
   layers.Dense(num_classes)
 ])'''
-
+print("1")
 data_augmentation = keras.Sequential(
   [
     layers.RandomFlip("horizontal",
@@ -62,7 +60,7 @@ data_augmentation = keras.Sequential(
     layers.RandomRotation(0.1),
     layers.RandomZoom(0.1),
   ])
-
+print("2")
 model = Sequential([
   data_augmentation,
   layers.Rescaling(1./255),
@@ -78,12 +76,12 @@ model = Sequential([
   layers.Dense(num_classes)
 ])
 
-
+print("3")
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
-
-epochs = 3
+print("4")
+epochs = 30
 history = model.fit(
   dataset,
   validation_data=val_dataset,

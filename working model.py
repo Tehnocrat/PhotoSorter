@@ -48,7 +48,7 @@ for item in get_data():
     test_img = tf.keras.utils.load_img(
         item, target_size=(256, 256))
     img_array = tf.keras.utils.img_to_array(test_img)
-    img_array = tf.expand_dims(img_array, 0)  # Create a batch
+    img_array = tf.expand_dims(img_array, 0)
 
     final = ""
     predictions.append(model.predict(img_array))
